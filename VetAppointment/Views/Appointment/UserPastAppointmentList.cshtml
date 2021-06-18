@@ -1,0 +1,60 @@
+﻿@model IEnumerable<VetAppointment.Models.Appointment>
+
+@{
+    ViewData["Title"] = "UserPastAppointmentList";
+}
+
+<h1>Historia wizyt</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Available)
+        </th>*@
+            <th>
+                Lekarz
+                @*@Html.DisplayNameFor(model => model.Description)*@
+            </th>
+            <th>
+                Adres
+            </th>
+            <th>
+                Ocena
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Available)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Vet.Name)  @Html.DisplayFor(modelItem => item.Vet.Surname) [@Html.DisplayFor(modelItem => item.Vet.UserName)]
+            tel: @Html.DisplayFor(modelItem => item.Vet.PhoneNumber)
+        </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vet.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.AppointmentID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.AppointmentID">Details</a> |*@
+                <a asp-action="Details" asp-route-id="@item.AppointmentID">Szczegóły</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

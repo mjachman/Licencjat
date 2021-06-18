@@ -1,0 +1,42 @@
+﻿@model VetAppointment.Models.Appointment
+
+@{
+    ViewData["Title"] = "Odwołaj";
+}
+
+<h1>Odwołanie wizyty</h1>
+
+<h3>Na pewno chcesz odwołać wizytę?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vet.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vet.Name) @Html.DisplayFor(model => model.Vet.Surname)
+        </dd>*@
+
+
+    </dl>
+    
+    <form asp-action="Cancel">
+        <input type="hidden" asp-for="AppointmentID" />
+        <input type="submit" value="Odwołaj" class="btn btn-danger" />
+        @if (this.User.IsInRole("User"))
+        {
+            <a asp-action="UserAppointmentList" class="btn btn-info">Powrót</a>
+        }
+        else if (this.User.IsInRole("Vet"))
+        {
+            <a asp-action="VetAppointmentList" class="btn btn-info">Powrót</a>
+        }
+
+    </form>
+</div>

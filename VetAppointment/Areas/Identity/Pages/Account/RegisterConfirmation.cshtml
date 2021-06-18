@@ -1,0 +1,21 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Potwierdzenie rejestracji";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+<p>
+    Na twój e-mail została wysłana wiadomość z linkiem aktywującym konto. 
+</p>
+    }
+    else
+    {
+<p>
+    Na twój e-mail została wysłana wiadomość z linkiem aktywującym konto.
+</p>
+    }
+}

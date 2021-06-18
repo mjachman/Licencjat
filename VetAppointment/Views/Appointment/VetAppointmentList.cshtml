@@ -1,0 +1,45 @@
+﻿@model IEnumerable<VetAppointment.Models.Appointment>
+
+@{
+    ViewData["Title"] = "VetAppointmentList";
+}
+
+<h1>Moje wizyty</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                Klient
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>*@
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Available)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.Name)  @Html.DisplayFor(modelItem => item.Client.Surname) [@Html.DisplayFor(modelItem => item.Client.UserName)]
+            tel: @Html.DisplayFor(modelItem => item.Client.PhoneNumber)
+        </td>
+          
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.AppointmentID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.AppointmentID">Details</a> |*@
+                <a asp-action="Cancel" asp-route-id="@item.AppointmentID">Odwołaj</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

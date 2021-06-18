@@ -1,0 +1,61 @@
+﻿@model IEnumerable<VetAppointment.Models.Message>
+
+@{
+    ViewData["Title"] = "Wiadomości";
+}
+
+<h1>Skrzynka odbiorcza</h1>
+
+<p>
+    <a asp-action="Create">[Wyślij nową wiadomość]</a>
+    <br />
+    <a asp-action="SentIndex">[Wysłane wiadomości]</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Nadawca
+            </th>
+            <th>
+                Temat
+            </th>
+            <th>
+                Data
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ViewedDate)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.isViewed)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sender.Name) @Html.DisplayFor(modelItem => item.Sender.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+
+            @*<td>
+            @Html.DisplayFor(modelItem => item.ViewedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isViewed)
+        </td>*@
+            <td>
+                <a asp-action="Display" class="btn btn-info" asp-route-id="@item.MessageID">Pokaż</a>
+                @*<a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.MessageID">Skasuj</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

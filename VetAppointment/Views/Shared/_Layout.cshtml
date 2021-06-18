@@ -1,0 +1,105 @@
+﻿@*@using Microsoft.AspNetCore.Identity
+@using VetAppointment.Models.Identity;
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VetAppointment</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">VetAppointment</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
+                        </li>
+                        @*<li class="nav-item">
+            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>*@
+                        @if (this.User.IsInRole("User"))
+                        {
+                            @*<li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Umów wizytę</a>
+            </li>*@
+
+                            @*<li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Pet" asp-action="Index">Moje zwierzęta</a>
+            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="VetList">Umów wizytę</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="UserAppointmentList">Moje wizyty</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="UserPastAppointmentList">Historia wizyt</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Message" asp-action="Index">Wiadomości</a>
+                            </li>
+                            @*<li class="nav-item">
+                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="VetsList">Weterynarze</a>
+            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Forum" asp-action="Forum">Forum</a>
+                            </li>
+                            <li class="nav-item">
+                                @*<a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="UserList">Użytkownicy</a>*@
+                            </li>
+
+                        }
+                        @if (this.User.IsInRole("Vet"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="DoctorDates">Dostępne terminy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="VetAppointmentList">Moje wizyty</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Appointment" asp-action="VetPastAppointmentList">Historia wizyt</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Message" asp-action="Index">Wiadomości</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Forum" asp-action="Forum">Forum</a>
+                            </li>
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - VetAppointment @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

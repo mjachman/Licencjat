@@ -1,0 +1,47 @@
+﻿@model VetAppointment.Models.ForumModel
+
+@{
+    ViewData["Title"] = "Answers";
+}
+
+<h1>Pytanie</h1>
+<div class="card mb-3 border border-primary">
+    <div class="card-header">
+        <h5 class="card-title"> @Html.DisplayFor(model => model.Entry.EntryBody)</h5>
+        <div class="card-text">@Html.DisplayFor(model => model.Entry.Author.Name) @Html.DisplayFor(model => model.Entry.Author.Surname) [@Html.DisplayFor(model => model.Entry.Author.UserName)]</div>
+        <div class="card-text">@Html.DisplayFor(model => model.Entry.CreatedDate) </div>
+        <div>
+            @*<a asp-action="Reply" class="btn btn-info" asp-route-id="@entry.EntryID">Odpowiedz</a>*@
+            @*<a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.MessageID">Skasuj</a>*@
+        </div>
+    </div>
+</div>
+@if (Model.Entries.Count()>0)
+{
+<h2>Odpowiedzi</h2>
+}
+
+@foreach (var entry in Model.Entries)
+{
+    <div class="card mb-3 border">
+        <div class="card-header">
+            <h5 class="card-title">@entry.EntryBody</h5>
+            <div class="card-text">@entry.Author.Name @entry.Author.Surname [@entry.Author]</div>
+            <div class="card-text">@entry.CreatedDate</div>
+            <div>
+            </div>
+        </div>
+    </div>
+}
+<h2>Odpowiedz</h2>
+<form asp-action="Reply">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <textarea asp-for="EntryBody" class="form-control" rows="5" cols="5" text-wrap:normal" type="text"></textarea>
+        <span asp-validation-for="EntryBody" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Dodaj odpowiedź" class="btn btn-primary" /> <a class="btn btn-info" asp-action="Forum">Powrót</a>
+    </div>
+
+</form>
